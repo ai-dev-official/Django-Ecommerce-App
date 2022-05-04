@@ -158,8 +158,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SITE_ID = 1
 
 # blo_project/setting.py
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'  # new
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'  # new
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STRIPE_SECRET_KEY = 'sk_test_51JzRHWKUdvuCxoHFxpmAS5Z43ylvcDc48M0Z0LA0JdYONfL64JvcKBvR2JRCzX27f2DjhJdIwUliWk8ixFonBUMp00gK9mbWqT'
