@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+
+
+<div>
+    <div class="jumbotron mb-5">
+            <div class="row jumrow py-5">
+                <div class="home-text">
+                    <h1 class="banner_title mb-3 font-weight-bold">Welcome to the <br>Mobile Phone Shop</h1>
+                    <p class="banner_text mb-3">The spanking new iPhone 13 is the real deal everyone is routing for. Get 20% when you buy before Christmas</p>
+                    <p><small class="link mb-3">See More</small></p>
+                    <a href="{% url 'shop:allProdCat' %}" class="btn btn-primary"> Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                </div>
+                <div class="cat_right">
+                    <img src="{% static './images/phon-n.jpg' %}">
+                </div>
+            </div>
+  </div>
+
+    <div class="row h-100 mt-3 form-handle">
+        <form class="d-flex clo-lg-6 col-md-6 col-sm-12 mx-auto my-auto", action="{% url 'search_app:searchResult' %}" method="get">
+            <input
+              type="search"
+              class="form-control"
+              me-2
+              placeholder="Search"
+              aria-label="Search"
+              name="q"
+            />
+            <button class="btnSearch btn-primary px-5 my-sm-0" type="submit">Search</button>
+          </form>
+    </div>
+    
+
+    <section class="home_banner p-5 mx-5 ">
+        <div class="two_cards p-5 mx-5 text-center">
+            <div class="card phone-card m-3 p-3">
+                <img src="{% static './images/iPhone.webp' %}" alt="">
+                <p>The New One</p>
+                <h4 class="my-2">iphone 12</h4>
+                <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+            <div class="card phone-card m-3 p-3">
+                <img src="{% static './images/iPhone.webp' %}" alt="">
+                <p>The New One</p>
+                <h4 class="my-2">iphone SE</h4>
+                <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></svg></a></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="home_banner p-5 mx-5 ">
+        <div class="dual_row row p-5 mx-5 bg-light card ">
+            <div class="iphon">
+                <div><h1>Trending Devices</h1></div>
+                <div><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                
+            </div>
+            <div class="cardstack text-center">
+                <div class="card card_banner m-2">
+                    <img src="{% static './images/iphone-12.webp' %}" class=" m-5" alt="">
+                    <h4 class="my-2">iphone 13</h4>
+                </div>
+                <div class="card card_banner m-2">
+                    <img src="{% static './images/iphone-13.png' %}" class=" m-5" alt="">
+                    <h4 class="my-2">iphone 12</h4>
+                </div>
+                <div class="card card_banner m-2">
+                    <img src="{% static './images/iphone-12.webp' %}" class=" m-5" alt="">
+                    <h4 class="my-2">iphone 11</h4>
+                </div>
+                <div class="card card_banner m-2">
+                    <img src="{% static './images/iphone-13.png' %}" class=" m-5" alt="">
+                    <h4 class="my-2">iphone X</h4>
+                </div>
+                <div class="card card_banner m-2">
+                    <img src="{% static './images/iphone-12.webp' %}" class=" m-5" alt="">
+                    <h4 class="mb-4">iphone 8</h4>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+<section class="home_banner p-5 mx-5 ">
+    <div class="two_cards p-5 mx-5 text-center">
+        <div class="card phone-card m-3 p-3">
+            <img src="{% static './images/iphone-12.webp' %}" alt="">
+            <p>The New One</p>
+            <h4 class="my-2">iphone XE</h4>
+            <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></svg></a></div>
+        </div>
+        <div class="card phone-card m-3 p-3">
+            <img src="{% static './images/iphone-13.webp' %}" alt="">
+            <p>The New One</p>
+            <h4 class="my-">iphone SE</h4>
+            <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+        </div>
+    </div>
+</section>
+
+<section class="home_banner p-5 mx-5">
+    <div class="container_row p-5 mx-5">
+        <div class="row lets-go">
+            <div class="image">
+                <img src="{% static './images/6.webp' %}" alt="">
+            </div>
+            <div id="text">
+                <div class="text">
+                    <h4 class="small">Shop online</h4>
+                    <h1 class="display-1">Let's go</h1>
+                    <h1 class="norm">shopping</h1>
+                    <p>The best phones ever made are in this online outlet, just choose one</p>
+                    <a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<section class="home_banner p-5 mx-5">
+    <div class="container_row p-5 mx-5">
+        <div class="row lets-go1">
+            <div id="text">
+                <div class="text">
+                    <h4 class="small">Shop online</h4>
+                    <h1 class="display-1">Let's go</h1>
+                    <h1 class="norm">shopping</h1>
+                    <p>The best phones ever made are in this online outlet, just choose one</p>
+                    <a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="image1">
+                <img src="{% static './images/2.webp' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+ 
+<section class="home_banner p-5 mx-5 ">
+    <div class="two_cards p-5 m-5 text-center">
+        <div class="card phone-card p-5 m-3 ">
+            <img src="{% static './images/iphone-12.webp' %}" alt="">
+            <p>The New One</p>
+            <h4 class="my-2">iphone 11</h4>
+            <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+        </div>
+        <div class="card phone-card p-5 m-3">
+            <img src="{% static './images/iphone-13.webp' %}" alt="">
+            <p>The New One</p>
+            <h4 class="my-">iphone 12</h4>
+            <div class="my-2"><a href="{% url 'shop:allProdCat' %}" class="btn btn-primary">Shop Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+        </div>
+    </div>
+</section>
+</div>
+
+
+{% endblock content %}
+

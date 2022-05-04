@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}This is the shopping cart page. Proceed to review your items and place the order.{% endblock %}
+{% block title %}Shopping Cart{% endblock %}
+{% block content %}
+{% if not cart_items %}
+
+<div class="container p-5">
+
+	<div class="mb-5">
+		<div class="text-center">
+			<br>
+			<h1 class="text-center my_title">
+				Your shopping cart is empty
+			</h1>
+			<br>
+			<p class="text-center">
+				Please click <a href="{% url 'shop:allProdCat' %}">here</a> to continue shopping.
+			</p>
+		</div>
+	</div>
+	{% else %}
+	<div>
+		<div class="text-center">
+			<br>
+			<h1 class="my_title">
+				Your shopping cart
+			</h1>
+			<br>
+		</div>
+	</div>
+    
+	<div class="row m-2">  
+	  <div class="col-md-6 blog-main mtop">
+			
+		<div class="cart_items p-3">
+			<table class="table cart_table">
+				<thead class="cart_head">
+					<tr>
+						<th colspan="5">
+							Your items
+						</th>
+					</tr>
+	
+				</thead>
+				<tbody>
+					{% for cart_item in cart_items %}
+					<tr>
+						<td>
+							<a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}" alt=""
+									class="float-left rounded cart_image"></a>
+						</td>
+						<td class="text-left">
+							{{cart_item.product.name}}
+							<br>
+							Unit Price: £{{cart_item.product.price}}
+							<br>
+							Qty: {{cart_item.quantity}} x £{{cart_item.product.price}}
+						</td>
+						<td>
+							£{{cart_item.sub_total}}
+						</td>
+						{% if cart_item.quantity < cart_item.product.stock %} <td>
+							<a href="{% url 'cart:add_cart' cart_item.product.id %} " class="cart_a"><i
+									class="fas fa-plus-circle cart_icon"></i></a>&nbsp;
+							<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="cart_a"><i
+									class="fas fa-minus-circle cart_icon"></i></a>&nbsp;
+							<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="cart_icon"><i
+									class="fas fa-trash-alt cart_icon"></i></a>
+							</td>
+							{% else %}
+							<td>
+								&nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="cart_a"><i
+										class="fas fa-minus-circle cart_icon"></i></a>&nbsp;
+								<a href="{% url 'cart:full_remove' cart_item.product.id %}" class="cart_icon"><i
+										class="fas fa-trash-alt cart_icon"></i></a>
+							</td>
+							<td></td>
+							{% endif %}
+					</tr>
+					{% endfor %}
+				</tbody>
+				
+			</table>
+			<div class="mx-auto mb-5">
+				<a href="{% url 'shop:allProdCat' %}" class="btn btn-secondary btn-block">Continue
+					Shopping</a>
+			</div>
+		</div>
+  
+	  </div><!-- /.blog-main -->
+  
+	  <aside class="col-md-6 blog-sidebar border-left">
+  
+		<div class="cart_checkout p-3">
+			<table class="table cart_table">
+				<thead class="cart_thead">
+					<tr>
+						<th colspan="10">
+							Checkout
+						</th>
+					</tr>
+				</thead>
+				<tbody class="table_head">
+					<tr>
+						<td>
+							Please review your shopping cart items before proceeding with the order payment.
+						</td>
+					</tr>
+					</tr>
+					{% if voucher %}
+					<tr class="subtotal">
+						<td>Total</td>
+						<td colspan="4"></td>
+						<td class="num">€{{ total|floatformat:"2" }}</td>
+					</tr>
+					<tr>
+						<td>
+							"{{ voucher.code }}" voucher
+							({{ voucher.discount }}% off)
+						</td>
+						<td colspan="4"></td>
+						<td class="num neg">
+							- €{{ discount|floatformat:"2" }}
+						</td>
+					</tr>
+					<tr class="total">
+						<td>Total</td>
+						<td colspan="4"></td>
+						<td class="num">
+							€{{ new_total|floatformat:"2" }}
+						</td>
+					</tr>
+					{% else %}
+					<tr class="total">
+						<td>Total</td>
+						<td colspan="4"></td>
+						<td class="num">
+							€{{ total|floatformat:"2"}}
+	
+						</td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+			<hr>
+			<p class="cart_head">Apply a voucher</p>
+			<hr>
+				<div class="mb-5">
+					<form action="{% url 'vouchers:apply' %}" method="post">
+						{{ voucher_apply_form }}
+						<input type="submit" value="Submit">
+						{% csrf_token %}
+					</form>
+				</div>
+		
+			<div class="mx-auto mb-5">
+				</tbody>
+				</table>
+				<form action="" method="POST">
+					{% csrf_token %}
+					<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ data_key }}"
+						data-amount="{{ stripe_total }}" data-name="The Mobile Phone Shop"
+						data-description="{{ description }}" data-image="{% static 'images/logo.png' %}" data-locale="auto"
+						data-currency="eur" data-shipping-address="true" data-billing-address="true" data-zip-code="true">
+						</script>
+				</form>
+				
+			</div>
+		</div>
+	   
+	  </aside><!-- /.blog-sidebar -->
+  
+	</div><!-- /.row -->
+  
+</div><!-- /.container -->
+{% endif %}
+{% endblock %}

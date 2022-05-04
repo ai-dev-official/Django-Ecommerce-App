@@ -1,0 +1,106 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+	{% if category %}
+		{{ category.description|truncatewords:155 }}
+	{% else %}
+		The Mobile Phone Shop | IOS, ANDROID, WINDOWS, CLASSIC
+	{% endif %}
+{% endblock %}
+{% block title %}
+	{% if category %}
+		{{ category.name }} - ANDROID
+	{% else %}
+	The Mobile Phone Shop | IOS, ANDROID, WINDOWS, CLASSIC
+	{% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row form-handle">
+				<form class="d-flex clo-lg-6 col-md-6 col-sm-12 mx-auto my-auto" action="{% url 'search_app:searchResult' %}" method="get">
+					<input
+					type="search"
+					class="form-control"
+					me-2
+					placeholder="Search Products"
+					aria-label="Search"
+					name="q"
+					/>
+					<button class="btnSearch btn-primary px-5 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+
+			<div class="row product-showcase mt-5">
+				{% for product in products %}
+				<div class="col-md-4 mb-5">
+					
+							
+							<div class="pcard zoomin_container">
+										<!-- <div class="pcard_image xzoom"> -->
+											
+							<a class="pcard_image xzoom img" href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" /></a>
+							<div class="discount bg-danger"><h1>{{product.voucher.discount}}<span>%</span></h1></div>
+										
+									<!-- </div> -->
+			
+							<div class="category_row dual_rowcard bg-light">
+								
+									<div class="pcard_body">
+										<small class="product_category">{{product.category}}</small>
+										<h4 class="pcard_title">
+											<a href="{{product.get_absolute_url}}">{{product.name}}</a>
+										</h4>
+										<p class="pcard_text">
+											{{product.description}}
+										</p>
+										<div class="pcard_icons">
+											<div class="price">€{{product.price}}</div>
+											<div class="icons_card">
+												{% if user.is_authenticated %}
+												<div class="ficon" id="">
+													<a id="loved" onclick="addedToCart();"  href="{% url 'cart:add_cart' product.id %}"><i class='bx bx-heart' ></i></a>
+												</div>
+												<div class="licon" id="">
+													<a id="liked" onclick="addedToList();" href="{% url 'accounts:user_wishlist' product.id %}"><i class="far fa-heart"></i></a>
+												</div>
+												{% else %}
+												<a href="{% url 'accounts:signin' %}"><i class='bx bx-cart-add'></i></a>
+												<a href="{% url 'accounts:signin' %}"><i class="far fa-heart"></i></a>
+												{% endif %}
+											  
+												
+												
+											
+											</div>
+										</div>
+									</div>
+					
+								</div>
+								
+							
+						</div>
+				
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="#">
+				{% if products.paginator.num_pages > 1 %}
+					<hr>
+					<div class="paginate_button text-center">
+						{% for pg in products.paginator.page_range %}
+							<a href="?page={{pg}}" class="btn new-paginator btn-light btn-sm {% if products.number == pg %}active{% endif %}">{{pg}}</a>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Profile Page{% endblock title %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+    <div class="container-fluid h-100">
+        
+        <div class="dasheight">
+          <div class="m-5">
+            <div class="col-12">
+                <h1 class="h2">My Account</h1>
+              </div>
+              <div class="col-12 d-flex justify-content-between">
+                <div>Dashboard for Account management <b>Wishlist, Order</b> and personal details</div>
+                {% comment %} <div><a href="#">Change Details</a></div> {% endcomment %}
+              </div>
+              <hr />
+        </div>
+        
+        <div class="row m-5">  
+          <div class="row col-md-8 blog-main mtop">
+              
+              <div class="dashcol">
+                {% if user.profile %}
+                <a href="{% url 'accounts:userpage' %}" role="button" style="max-width: 540px;">
+                  {% else %}
+                <a href="{% url 'accounts:edit_profile' %}" role="button" style="max-width: 540px;">
+                {% endif %}
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-3 dash m-2">
+                        <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-user-interface-kiranshastry-lineal-kiranshastry-1.png"/>
+                      </div>
+                      <div class="col-7">
+                        <div class="card-body dash_link">
+                          <h1 class="h5">My Profile</h1>
+                          <p class="card-text small">View, edit profile or change password</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                
+              </div>
+              <div class="dashcol">
+                <a href="{% url 'accounts:wishlist' %}" role="button" style="max-width: 540px;">
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-3 dash m-2">
+                        <img src="https://img.icons8.com/ios/50/000000/like--v1.png"/>
+                      </div>
+                      <div class="col-7">
+                        <div class="card-body dash_link">
+                          <h1 class="h5">My Wishlist</h1>
+                          <p class="card-text small">View, update or delete Wishlist</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="dashcol">
+                <a href="{% url 'order:order_history' %}" role="button" style="max-width: 540px;">
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-3 dash m-2">
+                        <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/50/000000/external-shopping-bag-finance-kiranshastry-lineal-kiranshastry.png"/>
+                      </div>
+                      <div class="col-7">
+                        <div class="card-body dash_link">
+                          <h1 class="h5">My Orders</h1>
+                          <p class="card-text small">Track, Change or buy again</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+      
+          </div>
+      
+          <aside class="col-md-4 blog-sidebar border-left">
+      
+          
+           
+          </aside>
+      
+        </div>
+        </div>
+      
+    </div>
+
+{% endblock content %}
